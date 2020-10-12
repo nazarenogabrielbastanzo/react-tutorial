@@ -7,6 +7,7 @@ const TableHeader = () => {
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Job</th>
+                <th scope="col">Remove</th>
             </tr>
         </thead>
     )
@@ -19,6 +20,11 @@ const TableBody = (props) => {
                 <td>{index +1}</td>
                 <td>{row.name}</td>
                 <td>{row.job}</td>
+                <td>
+                    <button onClick={() => props.removeCharacter(index)} className="btn btn-outline-danger">
+                        Delete
+                    </button>
+                </td>
             </tr>
         )
     })
@@ -26,17 +32,15 @@ const TableBody = (props) => {
     return <tbody>{rows}</tbody>
 }
 
-class Table extends Component {
-    render() {
-        const {characterData} = this.props
+const Table = (props) => {
+    const {characterData, removeCharacter} = props
 
-        return (
-            <table className="table">
-                <TableHeader />
-                <TableBody characterData={characterData} />
-            </table>
-        )
-    }
+    return (
+        <table className="table">
+            <TableHeader />
+            <TableBody characterData={characterData} removeCharacter={removeCharacter} />
+        </table>
+    )
 }
 
 export default Table
